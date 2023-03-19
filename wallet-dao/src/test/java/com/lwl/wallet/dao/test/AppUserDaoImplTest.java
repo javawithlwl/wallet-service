@@ -34,6 +34,15 @@ public class AppUserDaoImplTest {
         appUser.setUsername("Lakshman");
         appUser.setPassword("lakshman@123");
         appUser.setMobile("9876543210");
+        appUser.setEmail("lakshman.a@gmail.com");
+        return appUser;
+    }
+
+    public AppUser appUser1() {
+        AppUser appUser = new AppUser();
+        appUser.setUsername("LakshmanD");
+        appUser.setPassword("lakshman@456");
+        appUser.setMobile("9603724457");
         appUser.setEmail("lakshman.d@gmail.com");
         return appUser;
     }
@@ -44,6 +53,8 @@ public class AppUserDaoImplTest {
         try {
             con = ConnectionUtil.getConnection();
             st = con.createStatement();
+            st.executeUpdate("delete from payments");
+            st.executeUpdate("delete from transactions");
             st.executeUpdate("delete from wallet");
             st.executeUpdate("delete from appuser");
         } catch (SQLException e) {
@@ -65,8 +76,11 @@ public class AppUserDaoImplTest {
     @Test
     void selectUserTests() {
         String mobile = "9876543210";
+        String mobile1 = "9603724457";
         long id = appUserDao.insertUser(appUser());
+        long id2 = appUserDao.insertUser(appUser1());
         AppUser appUser = appUserDao.selectUser(mobile);
+        AppUser appUser1 = appUserDao.selectUser(mobile1);
         System.out.println(appUser.getId() + "  " + appUser.getUsername() + "   " + appUser.getPassword() + "  " +
                 appUser.getMobile() + "   " + appUser.getEmail());
     }

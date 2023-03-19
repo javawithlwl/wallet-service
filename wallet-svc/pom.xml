@@ -22,20 +22,11 @@
     <dependencies>
         <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>wallet-domain</artifactId>
-            <version>${wallet.domain.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.lwl</groupId>
             <artifactId>wallet-dao</artifactId>
-            <version>${wallet.dao.version}</version>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>com.lwl</groupId>
-            <artifactId>common-services</artifactId>
-            <version>${wallet.common.version}</version>
-        </dependency>
-
     </dependencies>
+
 
 </project>

@@ -18,13 +18,16 @@
     <dependencies>
         <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>common-services</artifactId>
-            <version>${wallet.common.version}</version>
+            <artifactId>wallet-domain</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>wallet-domain</artifactId>
-            <version>${wallet.common.version}</version>
+            <artifactId>common-services</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+
 </project>

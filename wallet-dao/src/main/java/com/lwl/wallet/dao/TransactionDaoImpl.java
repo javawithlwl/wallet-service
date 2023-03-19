@@ -18,8 +18,9 @@ public class TransactionDaoImpl implements  TransactionDao{
 
          try {
              con = ConnectionUtil.getConnection();
-             ps = con.prepareStatement("select id,fromMobile,toMobile,amount,transactionType from transactions where fromMobile =?");
+             ps = con.prepareStatement("select id,fromMobile,toMobile,amount,transactionType from transactions where (fromMobile =? or toMobile=?)");
              ps.setString(1,mobile);
+             ps.setString(2,mobile);
              rs= ps.executeQuery();
              while (rs.next()){
                  long id = rs.getLong("id");
@@ -50,11 +51,11 @@ public class TransactionDaoImpl implements  TransactionDao{
         long id = 0;
         try {
             con = ConnectionUtil.getConnection();
-            ps = con.prepareStatement("insert into transactions(toMobile,amount,transactionType) values(?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("insert into transactions(fromMobile,toMobile,amount,transactionType) values(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             ps.setString(1,transactions.getFromMobile());
-            ps.setString(1,transactions.getToMobile());
-            ps.setFloat(2, (float) transactions.getAmount());
-            ps.setString(3, String.valueOf((transactions.getTransactionType())));
+            ps.setString(2,transactions.getToMobile());
+            ps.setFloat(3, (float) transactions.getAmount());
+            ps.setString(4, String.valueOf((transactions.getTransactionType())));
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()){

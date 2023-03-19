@@ -37,8 +37,9 @@ public class TransactionDaoImplTest {
 
     @Test
     void selectTransactionList(){
-        String fromMobile = "9036102111";
+        String fromMobile = "9876543210";
         List<Transactions> transacList = transactionDao.selectTransaction(fromMobile);
         System.out.println(transacList);
     }
+
 }

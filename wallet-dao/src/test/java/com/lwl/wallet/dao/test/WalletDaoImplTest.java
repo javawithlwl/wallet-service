@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static com.lwl.wallet.domain.TransactionType.CR;
+import static com.lwl.wallet.domain.TransactionType.DR;
 
 public class WalletDaoImplTest {
 
@@ -20,7 +21,7 @@ public class WalletDaoImplTest {
         @BeforeEach
         public  void init(){
                 walletDao = new WalletDaoImpl();
-                walletDao.deleteAllWallets();
+                //walletDao.deleteAllWallets();
         }
 
         @Test
@@ -34,7 +35,7 @@ public class WalletDaoImplTest {
         }
         @Test
         void createWalletWithExistingMobileTest(){
-                String mobile = "9036102111";
+                String mobile = "9603724457";
                 walletDao.createWallet(mobile);
                 Exception exception = Assertions.assertThrows(WalletAlreadyExistsException.class, () -> {
                         walletDao.createWallet(mobile);
@@ -43,7 +44,7 @@ public class WalletDaoImplTest {
 
         @Test
         void checkBalanceTest(){
-                String mobile = "9036102111";
+                String mobile = "9876543210";
                 long id= walletDao.createWallet(mobile);
                 walletDao.insertBalance(mobile,"ICICI",5000);
                 float balance = walletDao.selectBalance(mobile);
@@ -74,10 +75,10 @@ public class WalletDaoImplTest {
         }
         @Test
         void  transactionAmountTest(){
-                String fromMobile ="9036102111";
+                String fromMobile ="9876543210";
                 String toMobile = "9603724457";
-                TransactionType transactionType = CR;
-                float amount = 2000;
+                TransactionType transactionType = DR;
+                float amount = 1000;
                 walletDao.transferAmount(fromMobile,toMobile,amount,transactionType);
         }
 }

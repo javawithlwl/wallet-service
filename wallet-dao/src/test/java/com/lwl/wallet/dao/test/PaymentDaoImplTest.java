@@ -16,7 +16,7 @@ public class PaymentDaoImplTest {
 
     @Test
     void selectPaymentsTest(){
-        String mobile = "9036102111";
+        String mobile = "9876543210";
         List<Payments> listPaymnts = paymentDao.selectPayments(mobile);
         System.out.println(listPaymnts);
     }
