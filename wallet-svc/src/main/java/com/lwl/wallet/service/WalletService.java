@@ -1,10 +1,25 @@
 package com.lwl.wallet.service;
 
-import java.io.File;
+import com.lwl.wallet.domain.TransactionType;
+import com.lwl.wallet.domain.Wallet;
+
+import java.util.List;
 
 public interface WalletService {
 
-      boolean transferAmount(long fromWalletId,long toWalletId,double amount);
-      File exportStatement(String mobile);
-      double getBalance(String mobile);
+      float addBalance(String mobile, String source, float balance);
+
+      float getBalance(String mobile);
+
+      Wallet getWallet(String mobile);
+
+      long addWallet(String mobile);
+
+      List<String> getActiveMobile();
+
+      void deleteWallet(String mobile);
+
+      void deleteAllWallets();
+
+      float transferAmount(String fromMobile, String toMobile, float amount, TransactionType transactionType);
 }

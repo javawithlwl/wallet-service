@@ -35,6 +35,7 @@
             <artifactId>common-services</artifactId>
             <version>${wallet.common.version}</version>
         </dependency>
+
     </dependencies>
 
 </project>

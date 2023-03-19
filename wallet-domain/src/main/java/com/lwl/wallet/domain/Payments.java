@@ -6,15 +6,16 @@ import lombok.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 @ToString
+@Builder
 
-public class Transactions {
+public class Payments {
+
     private long id;
-    private String fromMobile;
+    private String source;
     private String toMobile;
     private double amount;
     private TransactionType transactionType;
 
-
 }
+

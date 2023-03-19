@@ -8,9 +8,7 @@
         <artifactId>wallet-service</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
     <artifactId>wallet-dao</artifactId>
-
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
@@ -21,6 +19,11 @@
         <dependency>
             <groupId>com.lwl</groupId>
             <artifactId>common-services</artifactId>
+            <version>${wallet.common.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.lwl</groupId>
+            <artifactId>wallet-domain</artifactId>
             <version>${wallet.common.version}</version>
         </dependency>
     </dependencies>
