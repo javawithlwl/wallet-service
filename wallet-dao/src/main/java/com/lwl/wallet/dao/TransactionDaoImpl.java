@@ -3,11 +3,13 @@ package com.lwl.wallet.dao;
 import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.domain.Transactions;
 import com.lwl.wallet.util.ConnectionUtil;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class TransactionDaoImpl implements  TransactionDao{
     @Override
     public List<Transactions> selectTransaction(String mobile) {

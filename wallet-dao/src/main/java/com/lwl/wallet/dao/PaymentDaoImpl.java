@@ -3,11 +3,13 @@ package com.lwl.wallet.dao;
 import com.lwl.wallet.domain.Payments;
 import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.util.ConnectionUtil;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class PaymentDaoImpl implements PaymentDao{
     @Override
     public long insertPayment(Payments payments) {

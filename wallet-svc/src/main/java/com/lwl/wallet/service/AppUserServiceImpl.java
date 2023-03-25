@@ -3,13 +3,16 @@ package com.lwl.wallet.service;
 import com.lwl.wallet.dao.AppUserDao;
 import com.lwl.wallet.dao.AppUserDaoImpl;
 import com.lwl.wallet.domain.AppUser;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class AppUserServiceImpl implements AppUserService{
-    private AppUserDao appUserDao;
 
-    public AppUserServiceImpl(){
-        appUserDao = new AppUserDaoImpl();
-    }
+    private final AppUserDao appUserDao;
+
+
     @Override
     public long addUser(AppUser appUser) {
         return appUserDao.insertUser(appUser);

@@ -3,17 +3,18 @@ package com.lwl.wallet.dao;
 import com.lwl.wallet.dao.exception.UserAlreadyExistsException;
 import com.lwl.wallet.domain.AppUser;
 import com.lwl.wallet.util.ConnectionUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 
-
+@Repository
+@RequiredArgsConstructor
 public class AppUserDaoImpl implements AppUserDao {
 
-    private WalletDao walletDao;
+    private final WalletDao walletDao;
 
-    public AppUserDaoImpl() {
-        walletDao = new WalletDaoImpl();
-    }
+
 
     @Override
     public long insertUser(AppUser appUser) {

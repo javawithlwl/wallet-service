@@ -6,6 +6,8 @@ import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.domain.Transactions;
 import com.lwl.wallet.domain.Wallet;
 import com.lwl.wallet.util.ConnectionUtil;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -16,15 +18,14 @@ import java.util.concurrent.ThreadLocalRandom;
 import static com.lwl.wallet.domain.TransactionType.CR;
 import static com.lwl.wallet.domain.TransactionType.DR;
 
+@Repository
+@RequiredArgsConstructor
 public class WalletDaoImpl implements WalletDao {
 
-    private TransactionDao transactionDao;
-    private PaymentDao paymentDao;
+    private final TransactionDao transactionDao;
+    private final PaymentDao paymentDao;
 
-    public WalletDaoImpl() {
-        transactionDao = new TransactionDaoImpl();
-        paymentDao = new PaymentDaoImpl();
-    }
+
 
     @Override
     public float insertBalance(String mobile, String source, float amount) {

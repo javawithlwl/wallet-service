@@ -4,16 +4,15 @@ import com.lwl.wallet.dao.WalletDao;
 import com.lwl.wallet.dao.WalletDaoImpl;
 import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.domain.Wallet;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
+@RequiredArgsConstructor
 public class WalletServiceImpl implements WalletService{
-    private WalletDao walletDao;
-
-    public WalletServiceImpl() {
-        walletDao = new WalletDaoImpl();
-    }
-
+    private final WalletDao walletDao;
 
     @Override
     public float addBalance(String mobile, String source, float balance) {

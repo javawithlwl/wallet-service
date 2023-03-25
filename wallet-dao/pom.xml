@@ -10,23 +10,20 @@
     </parent>
     <artifactId>wallet-dao</artifactId>
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>19</java.version>
         <wallet.common.version>0.0.1-SNAPSHOT</wallet.common.version>
+        <wallet.domain.version>0.0.1-SNAPSHOT</wallet.domain.version>
     </properties>
     <dependencies>
-        <dependency>
+       <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>wallet-domain</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>common-services</artifactId>
+            <version>${wallet.common.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>common-services</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
+            <artifactId>wallet-domain</artifactId>
+            <version>${wallet.domain.version}</version>
         </dependency>
     </dependencies>
 
