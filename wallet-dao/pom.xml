@@ -11,19 +11,15 @@
     <artifactId>wallet-dao</artifactId>
     <properties>
         <java.version>19</java.version>
-        <wallet.common.version>0.0.1-SNAPSHOT</wallet.common.version>
-        <wallet.domain.version>0.0.1-SNAPSHOT</wallet.domain.version>
     </properties>
     <dependencies>
        <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>common-services</artifactId>
-            <version>${wallet.common.version}</version>
+            <artifactId>wallet-domain</artifactId>
         </dependency>
         <dependency>
             <groupId>com.lwl</groupId>
-            <artifactId>wallet-domain</artifactId>
-            <version>${wallet.domain.version}</version>
+            <artifactId>common-services</artifactId>
         </dependency>
     </dependencies>
 
