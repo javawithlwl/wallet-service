@@ -5,7 +5,7 @@ import com.lwl.wallet.domain.AppUser;
 public interface AppUserService {
 
     long addUser(AppUser appUser);
-    AppUser getUsers(String mobile);
+    AppUser getUser(String mobile);
     boolean deleteUser(String mobile);
     String getUsername(String mobile);
     String getPassword(String mobile);
