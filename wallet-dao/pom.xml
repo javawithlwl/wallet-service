@@ -10,7 +10,7 @@
     </parent>
     <artifactId>wallet-dao</artifactId>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
     </properties>
     <dependencies>
        <dependency>

@@ -21,7 +21,7 @@
         <module>wallet-web</module>
     </modules>
     <properties>
-        <java.version>19</java.version>
+        <java.version>17</java.version>
         <postgresql.version>42.5.4</postgresql.version>
         <spring.boot.version>3.0.5</spring.boot.version>
         <lombok.version>1.18.26</lombok.version>
@@ -96,6 +96,11 @@
                 <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
                 <version>${openapi.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-validation</artifactId>
+                <version>${spring.boot.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -110,12 +115,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-validation</artifactId>
-        </dependency>
-
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
