@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @ToString
-
 public class AppUser {
     public long id;
     public String username;

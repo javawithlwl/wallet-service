@@ -35,7 +35,7 @@ public class WalletDaoImpl implements WalletDao {
         float balance = 0;
         try {
             con = ConnectionUtil.getConnection();
-            pst = con.prepareStatement("update wallet set balance=balance+? where mobile=?");
+            pst = con.prepareStatement("update wallet set balance=balance + ? where mobile = ?");
             pst.setFloat(1, amount);
             pst.setString(2, mobile);
             pst.executeUpdate();

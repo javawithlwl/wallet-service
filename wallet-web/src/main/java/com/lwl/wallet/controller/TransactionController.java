@@ -16,7 +16,8 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @GetMapping("/{mobile}")
-    ResponseEntity<List<Transactions>> selectTransacions(@PathVariable("mobile") String mobile){
+    ResponseEntity<List<Transactions>> selectTransactions(@PathVariable("mobile") String mobile){
+
         List<Transactions> transactionsList = transactionService.selectTransaction(mobile);
         return ResponseEntity.ok(transactionsList);
     }

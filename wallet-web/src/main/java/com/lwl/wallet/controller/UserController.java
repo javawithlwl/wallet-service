@@ -22,7 +22,7 @@ public class UserController {
 
     @GetMapping("/{mobile}")
     ResponseEntity<AppUser> getUser(@PathVariable("mobile") String mobile){
-        AppUser user = appUserService.getUsers(mobile);
+        AppUser user = appUserService.getUser(mobile);
         return ResponseEntity.ok(user);
     }
 

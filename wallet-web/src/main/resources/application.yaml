@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /wallet
+
+app:
+  description:
+      Wallet Spring Boot Application
