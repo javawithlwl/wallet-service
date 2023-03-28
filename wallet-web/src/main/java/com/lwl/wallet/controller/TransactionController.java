@@ -22,7 +22,7 @@ public class TransactionController {
         return ResponseEntity.ok(transactionsList);
     }
 
-    @RequestMapping("/addTransaction")
+    @GetMapping("/addTransaction")
     ResponseEntity<String> insertTransactions(@RequestBody Transactions transactions){
         long transactions1 = transactionService.insertTransaction(transactions);
         return ResponseEntity.ok("Transactions have done with id's : " + transactions1);
