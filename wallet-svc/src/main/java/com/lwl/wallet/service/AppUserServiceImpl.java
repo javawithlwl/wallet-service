@@ -2,6 +2,9 @@ package com.lwl.wallet.service;
 
 import com.lwl.wallet.dao.AppUserDao;
 import com.lwl.wallet.dao.AppUserDaoImpl;
+import com.lwl.wallet.domain.AppUser;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import com.lwl.wallet.dao.exception.UserAlreadyExistsException;
 import com.lwl.wallet.domain.AppUser;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +24,10 @@ public class AppUserServiceImpl implements AppUserService{
     private final AppUserDao appUserDao;
 
 
+
     @Override
-    public long addUser(AppUser appUser) {
+    public AppUser getUsers(String mobile) {
+
         Assert.notNull(appUser,"App user can't be null");
         Assert.isTrue(StringUtils.hasText(appUser.getMobile()),"Mobile number can't be null or empty");
         Assert.isTrue(StringUtils.hasText(appUser.getEmail()),"Email can't be null or empty");

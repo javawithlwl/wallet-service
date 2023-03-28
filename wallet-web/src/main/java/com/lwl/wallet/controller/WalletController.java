@@ -17,6 +17,7 @@ public class WalletController {
 
     private final WalletService walletService;
 
+
     @PutMapping("/load-money")
     ResponseEntity<Float> loadMoney(@RequestBody LoadAmountDto loadAmountDto){
         float addBalance = walletService.addBalance(loadAmountDto.getMobile(),loadAmountDto.getSource(),loadAmountDto.getAmount());
@@ -34,6 +35,7 @@ public class WalletController {
         Wallet wallet = walletService.getWallet(mobile);
         return ResponseEntity.ok(wallet);
     }
+
 
     @PutMapping("/transfer-amount")
     ResponseEntity<Float> transferAmount(@RequestBody TransferAmountDto transferAmountDto){

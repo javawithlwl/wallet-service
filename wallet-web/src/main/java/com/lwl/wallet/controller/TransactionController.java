@@ -17,8 +17,15 @@ public class TransactionController {
 
     @GetMapping("/{mobile}")
     ResponseEntity<List<Transactions>> selectTransactions(@PathVariable("mobile") String mobile){
+
         List<Transactions> transactionsList = transactionService.selectTransaction(mobile);
         return ResponseEntity.ok(transactionsList);
+    }
+
+    @RequestMapping("/addTransaction")
+    ResponseEntity<String> insertTransactions(@RequestBody Transactions transactions){
+        long transactions1 = transactionService.insertTransaction(transactions);
+        return ResponseEntity.ok("Transactions have done with id's : " + transactions1);
     }
 
 }
