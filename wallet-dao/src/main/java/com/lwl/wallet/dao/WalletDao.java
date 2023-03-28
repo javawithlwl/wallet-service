@@ -16,10 +16,10 @@ public interface WalletDao {
 
     List<String> getActiveMobile();
 
-    void deleteWallet(String mobile);
+    boolean deleteWallet(String mobile);
 
     void deleteAllWallets();
 
-    float transferAmount(String fromMobile, String toMobile, float amount, TransactionType transactionType);
+    float transferAmount(String fromMobile, String toMobile, float amount);
 
 }

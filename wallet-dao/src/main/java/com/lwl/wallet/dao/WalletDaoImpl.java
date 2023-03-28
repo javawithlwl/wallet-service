@@ -165,7 +165,7 @@ public class WalletDaoImpl implements WalletDao {
         return mobileList;
     }
 
-    public void deleteWallet(String mobile) {
+    public boolean deleteWallet(String mobile) {
         Connection con = null;
         PreparedStatement ps = null;
         if (this.walletExists(mobile)) {
@@ -174,11 +174,12 @@ public class WalletDaoImpl implements WalletDao {
                 ps = con.prepareStatement("delete from wallet where mobile = ?");
                 ps.setString(1, mobile);
                 System.out.println("deleted wallet");
+                return true;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
+        return false;
     }
 
     @Override
@@ -197,7 +198,7 @@ public class WalletDaoImpl implements WalletDao {
     }
 
     @Override
-    public float transferAmount(String fromMobile, String toMobile, float amount, TransactionType transactionType) {
+    public float transferAmount(String fromMobile, String toMobile, float amount) {
         float balance1 = 0;
         if (!walletExists(fromMobile)){
             System.out.println("Wallet is not existed on " +fromMobile);
@@ -210,60 +211,31 @@ public class WalletDaoImpl implements WalletDao {
             Connection con = null;
             PreparedStatement ps = null;
             PreparedStatement ps2 = null;
-            if(transactionType == DR) {
-                if (balance1 >= amount) {
-                    float totalBalance2 = balance2 + amount;
-                    float finalBalance = balance1 - amount;
-                    try {
-                        con = ConnectionUtil.getConnection();
-                        ps = con.prepareStatement("update wallet set balance =? where mobile = ?");
-                        ps.setFloat(1, totalBalance2);
-                        ps.setString(2, toMobile);
-                        ps.executeUpdate();
-                        ps2 = con.prepareStatement("update wallet set balance =? where mobile = ?");
-                        ps2.setFloat(1, finalBalance);
-                        ps2.setString(2, fromMobile);
-                        ps2.executeUpdate();
+            if (balance1 >= amount) {
+                float totalBalance2 = balance2 + amount;
+                float finalBalance = balance1 - amount;
+                try {
+                    con = ConnectionUtil.getConnection();
+                    ps = con.prepareStatement("update wallet set balance =? where mobile = ?");
+                    ps.setFloat(1, totalBalance2);
+                    ps.setString(2, toMobile);
+                    ps.executeUpdate();
+                    ps2 = con.prepareStatement("update wallet set balance =? where mobile = ?");
+                    ps2.setFloat(1, finalBalance);
+                    ps2.setString(2, fromMobile);
+                    ps2.executeUpdate();
 
-                        Transactions transactions = new Transactions();
-                        transactions.setAmount(amount);
-                        transactions.setTransactionType(DR);
-                        transactions.setFromMobile(fromMobile);
-                        transactions.setToMobile(toMobile);
-                        transactionDao.insertTransaction(transactions);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    System.out.println("Wallet "+fromMobile +"doesnt have sufficient balance to tranfer");
+                    Transactions transactions = new Transactions();
+                    transactions.setAmount(amount);
+                    transactions.setTransactionType(DR);
+                    transactions.setFromMobile(fromMobile);
+                    transactions.setToMobile(toMobile);
+                    transactionDao.insertTransaction(transactions);
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } else if (transactionType == CR) {
-                if (balance2 >= amount) {
-                    float totalBalance2 = balance2 - amount;
-                    float finalBalance1 = balance1 + amount;
-                    try {
-                        con = ConnectionUtil.getConnection();
-                        ps = con.prepareStatement("update wallet set balance =? where mobile = ?");
-                        ps.setFloat(1, totalBalance2);
-                        ps.setString(2, toMobile);
-                        ps.executeUpdate();
-                        ps2 = con.prepareStatement("update wallet set balance =? where mobile = ?");
-                        ps2.setFloat(1, finalBalance1);
-                        ps2.setString(2, fromMobile);
-                        ps2.executeUpdate();
-
-                        Transactions transactions = new Transactions();
-                        transactions.setAmount(amount);
-                        transactions.setTransactionType(CR);
-                        transactions.setFromMobile(fromMobile);
-                        transactions.setToMobile(toMobile);
-                        transactionDao.insertTransaction(transactions);
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    System.out.println("Wallet on "+toMobile +" doesnt have sufficient balance to tranfer");
-                }
+            }else{
+                System.out.println("Wallet "+fromMobile +"doesnt have sufficient balance to tranfer");
             }
         }else {
             System.out.println("Wallet is not existed on " +toMobile);

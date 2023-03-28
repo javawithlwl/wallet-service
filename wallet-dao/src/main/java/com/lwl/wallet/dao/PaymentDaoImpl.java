@@ -45,7 +45,7 @@ public class PaymentDaoImpl implements PaymentDao{
         ResultSet rs = null;
         try {
              con = ConnectionUtil.getConnection();
-             ps= con.prepareStatement("select id,source,toMobile,amount,transactionType from payments where toMobile = ?");
+             ps= con.prepareStatement("select id,source,toMobile,amount,transactionType from payments where toMobile=?");
              ps.setString(1,mobile);
              rs= ps.executeQuery();
              if (rs.next()) {

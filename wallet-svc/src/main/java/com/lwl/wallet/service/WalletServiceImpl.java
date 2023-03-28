@@ -40,8 +40,8 @@ public class WalletServiceImpl implements WalletService{
     }
 
     @Override
-    public void deleteWallet(String mobile) {
-        walletDao.deleteWallet(mobile);
+    public boolean deleteWallet(String mobile) {
+        return walletDao.deleteWallet(mobile);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class WalletServiceImpl implements WalletService{
     }
 
     @Override
-    public float transferAmount(String fromMobile, String toMobile, float amount, TransactionType transactionType) {
-        return walletDao.transferAmount(fromMobile, toMobile, amount, transactionType);
+    public float transferAmount(String fromMobile, String toMobile, float amount) {
+        return walletDao.transferAmount(fromMobile, toMobile, amount);
     }
 }

@@ -1,6 +1,5 @@
 package com.lwl.wallet.service;
 
-import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.domain.Wallet;
 
 import java.util.List;
@@ -17,9 +16,9 @@ public interface WalletService {
 
       List<String> getActiveMobile();
 
-      void deleteWallet(String mobile);
+      boolean deleteWallet(String mobile);
 
       void deleteAllWallets();
 
-      float transferAmount(String fromMobile, String toMobile, float amount, TransactionType transactionType);
+      float transferAmount(String fromMobile, String toMobile, float amount);
 }
