@@ -12,29 +12,20 @@
     <artifactId>wallet-svc</artifactId>
 
     <properties>
-        <maven.compiler.source>19</maven.compiler.source>
-        <maven.compiler.target>19</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <wallet.domain.version>0.0.1-SNAPSHOT</wallet.domain.version>
-        <wallet.dao.version>0.0.1-SNAPSHOT</wallet.dao.version>
-        <wallet.common.version>0.0.1-SNAPSHOT</wallet.common.version>
+        <java.version>19</java.version>
     </properties>
     <dependencies>
         <dependency>
             <groupId>com.lwl</groupId>
+            <artifactId>common-services</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.lwl</groupId>
             <artifactId>wallet-domain</artifactId>
-            <version>${wallet.domain.version}</version>
         </dependency>
         <dependency>
             <groupId>com.lwl</groupId>
             <artifactId>wallet-dao</artifactId>
-            <version>${wallet.dao.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.lwl</groupId>
-            <artifactId>common-services</artifactId>
-            <version>${wallet.common.version}</version>
         </dependency>
     </dependencies>
-
 </project>
