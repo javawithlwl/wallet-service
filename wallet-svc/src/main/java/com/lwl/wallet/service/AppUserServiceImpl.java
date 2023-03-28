@@ -26,7 +26,7 @@ public class AppUserServiceImpl implements AppUserService{
 
 
     @Override
-    public AppUser getUsers(String mobile) {
+    public long addUser(AppUser appUser) {
 
         Assert.notNull(appUser,"App user can't be null");
         Assert.isTrue(StringUtils.hasText(appUser.getMobile()),"Mobile number can't be null or empty");
