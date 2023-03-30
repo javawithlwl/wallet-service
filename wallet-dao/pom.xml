@@ -21,6 +21,10 @@
             <groupId>com.lwl</groupId>
             <artifactId>common-services</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jdbc</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

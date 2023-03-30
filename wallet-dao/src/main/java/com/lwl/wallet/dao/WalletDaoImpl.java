@@ -2,7 +2,6 @@ package com.lwl.wallet.dao;
 
 import com.lwl.wallet.dao.exception.WalletAlreadyExistsException;
 import com.lwl.wallet.domain.Payments;
-import com.lwl.wallet.domain.TransactionType;
 import com.lwl.wallet.domain.Transactions;
 import com.lwl.wallet.domain.Wallet;
 import com.lwl.wallet.util.ConnectionUtil;

@@ -1,11 +1,12 @@
 package com.lwl.wallet.service;
 
 import com.lwl.wallet.domain.AppUser;
+import com.lwl.wallet.dto.AppUserDto;
 
 public interface AppUserService {
 
     long addUser(AppUser appUser);
-    AppUser getUser(String mobile);
+    AppUserDto getUser(String mobile);
     boolean deleteUser(String mobile);
     String getUsername(String mobile);
     String getPassword(String mobile);

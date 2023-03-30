@@ -1,6 +1,7 @@
 package com.lwl.wallet.controller;
 
 import com.lwl.wallet.domain.AppUser;
+import com.lwl.wallet.dto.AppUserDto;
 import com.lwl.wallet.dto.GetUsersDto;
 import com.lwl.wallet.service.AppUserService;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ public class UserController {
     }
 
     @GetMapping("/{mobile}")
-    ResponseEntity<AppUser> getUser(@PathVariable("mobile") String mobile){
-        AppUser user = appUserService.getUser(mobile);
+    ResponseEntity<AppUserDto> getUser(@PathVariable("mobile") String mobile){
+        AppUserDto user = appUserService.getUser(mobile);
         return ResponseEntity.ok(user);
     }
 

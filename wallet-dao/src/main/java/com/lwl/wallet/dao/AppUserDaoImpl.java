@@ -1,9 +1,16 @@
 package com.lwl.wallet.dao;
 
+import com.lwl.wallet.dao.exception.ResourceNotFoundException;
 import com.lwl.wallet.dao.exception.UserAlreadyExistsException;
 import com.lwl.wallet.domain.AppUser;
+import com.lwl.wallet.dto.AppUserDto;
 import com.lwl.wallet.util.ConnectionUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
@@ -13,67 +20,34 @@ import java.sql.*;
 public class AppUserDaoImpl implements AppUserDao {
 
     private final WalletDao walletDao;
-
+    private final JdbcTemplate jdbcTemplate;
 
 
     @Override
     public long insertUser(AppUser appUser) {
-        if (isUserExists(appUser.getMobile())) {
-            throw new UserAlreadyExistsException("User exists with given mobile number", "USER_EXISTS");
-        }
-        Connection con = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        long id = 0;
-        try {
-            con = ConnectionUtil.getConnection();
-            pst = con.prepareStatement("insert into appuser(username,password,mobile,email,status) values(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        jdbcTemplate.update(con -> {
+            PreparedStatement pst = con.prepareStatement("insert into appuser(username,password,mobile,email,status) values(?,?,?,?,?)",new String[]{"id"});
             pst.setString(1, appUser.getUsername());
             pst.setString(2, appUser.getPassword());
             pst.setString(3, appUser.getMobile());
             pst.setString(4, appUser.getEmail());
             pst.setBoolean(5, false);
-            pst.executeUpdate();
-            rs = pst.getGeneratedKeys();
-            if (rs.next()) {
-                id = rs.getLong("id");
-            }
-            walletDao.createWallet(appUser.getMobile());
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+            return pst;
+        },keyHolder);
+        long id = keyHolder.getKey().longValue();
         return id;
     }
 
     @Override
-    public AppUser selectUser(String mobile) {
-        Connection con = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
-        AppUser appUser = null;
-        try {
-            con = ConnectionUtil.getConnection();
-            pst = con.prepareStatement("select id,username,password,mobile,email from appuser where mobile=?");
-            pst.setString(1, mobile);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                long id = rs.getLong("id");
-                String username = rs.getString("username");
-                String password = rs.getString("password");
-                String mobile1 = rs.getString("mobile");
-                String email = rs.getString("email");
-                appUser = new AppUser();
-                appUser.setId(id);
-                appUser.setUsername(username);
-                appUser.setPassword(password);
-                appUser.setMobile(mobile1);
-                appUser.setEmail(email);
-                return appUser;
+    public AppUserDto selectUser(String mobile) {
+            if(isUserExists(mobile)){
+                AppUserDto user = jdbcTemplate.queryForObject("select id,username,mobile,email,status from appuser where mobile=?",
+                    getRowMapperAppUserDto(), mobile);
+                return user;
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return appUser;
+            throw new ResourceNotFoundException("User is not found for the given mobile number "+mobile,"USER_NOT_FOUND");
     }
 
     @Override
@@ -169,26 +143,23 @@ public class AppUserDaoImpl implements AppUserDao {
         return appUser;
     }
 
-    private boolean isUserExists(String mobile) {
-        Connection con = null;
-        PreparedStatement pst = null;
-        ResultSet rs = null;
+    public boolean isUserExists(String mobile) {
+        int res = jdbcTemplate.queryForObject("select count(*) from appuser where mobile=?",Integer.class,mobile);
+        return res != 0;
+    }
 
-        try {
-            con = ConnectionUtil.getConnection();
-            pst = con.prepareStatement("select count(1) from appuser where mobile=?");
-            pst.setString(1, mobile);
-            rs = pst.executeQuery();
-            if (rs.next()) {
-                if (rs.getInt(1) > 0) {
-                    return true;
-                }
-            }
+    private RowMapper<AppUserDto> getRowMapperAppUserDto(){
+       return (rs, rowNum) -> {
+           AppUserDto obj = AppUserDto.builder()
+               .status(rs.getBoolean("status"))
+               .username(rs.getString("username"))
+               .email(rs.getString("email"))
+               .mobile(rs.getString("mobile"))
+               .id(rs.getLong("id"))
+               .build();
+           return obj;
+       };
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return false;
     }
 }
 
